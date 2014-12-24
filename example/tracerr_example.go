@@ -23,7 +23,7 @@ func nested(depth int, fn func() error) error {
 	if depth <= 1 {
 		return fn()
 	}
-	return tracerr.Wrap(nested(depth-1, fn))
+	return nested(depth-1, fn)
 }
 
 type foo struct{}
