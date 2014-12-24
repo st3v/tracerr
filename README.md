@@ -1,6 +1,8 @@
 tracerr
 =======
 
+[![Build Status](https://travis-ci.org/st3v/tracerr.svg?branch=master)](https://travis-ci.org/st3v/tracerr)
+
 Traceable errors in Go.
 
 #### Example:
