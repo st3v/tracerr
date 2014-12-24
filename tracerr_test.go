@@ -24,6 +24,16 @@ func TestWrap(t *testing.T) {
 	}
 }
 
+func TestNestedWrap(t *testing.T) {
+	errMsg := "Bogus Error"
+	err1 := Wrap(errors.New(errMsg))
+	err2 := Wrap(err1)
+
+	if err1.Error() != err2.Error() {
+		t.Errorf("Expected error messages to be the same.\nExpected:\n%s\nGot:\n%s", err1.Error(), err2.Error())
+	}
+}
+
 func TestWrapForDeepStack(t *testing.T) {
 	err := nestedWrapError(maxStackDepth+10, errors.New("Bogus Error"))
 	expectedCount := maxStackDepth
