@@ -15,6 +15,10 @@ type traceError struct {
 const maxStackDepth = 64
 
 func Wrap(err error) error {
+	if err == nil {
+		return err
+	}
+
 	if _, ok := err.(interface {
 		stackTrace() []string
 	}); ok {
