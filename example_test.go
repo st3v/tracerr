@@ -16,15 +16,6 @@ func ExampleWrap() {
 
 	// Print error message and stack trace
 	fmt.Println(err.Error())
-	// Output:
-	// Example Error
-	//   at ExampleWrap (github.com/st3v/tracerr_test/example_test.go:15)
-	//   at runExample (testing/example.go:99)
-	//   at RunExamples (testing/example.go:36)
-	//   at Main (testing/testing.go:436)
-	//   at main (main/_testmain.go:59)
-	//   at main (runtime/proc.c:249)
-	//   at goexit (runtime/proc.c:1445)
 }
 
 func ExampleWrap_nested() {
@@ -40,21 +31,6 @@ func ExampleWrap_nested() {
 	if err != nil {
 		fmt.Println(err.Error())
 	}
-	// Output:
-	// Example Error
-	//   at (*foo).bar (github.com/st3v/tracerr_test/example_test.go:72)
-	//   at func·001 (github.com/st3v/tracerr_test/example_test.go:36)
-	//   at nested (github.com/st3v/tracerr_test/example_test.go:63)
-	//   at nested (github.com/st3v/tracerr_test/example_test.go:65)
-	//   at nested (github.com/st3v/tracerr_test/example_test.go:65)
-	//   at nested (github.com/st3v/tracerr_test/example_test.go:65)
-	//   at ExampleWrap_nested (github.com/st3v/tracerr_test/example_test.go:37)
-	//   at runExample (testing/example.go:99)
-	//   at RunExamples (testing/example.go:36)
-	//   at Main (testing/testing.go:436)
-	//   at main (main/_testmain.go:59)
-	//   at main (runtime/proc.c:249)
-	//   at goexit (runtime/proc.c:1445)
 }
 
 // Recursive function that calls the passed in function at its tail end.
