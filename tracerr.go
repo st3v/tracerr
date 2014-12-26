@@ -7,11 +7,13 @@ import (
 	"runtime"
 )
 
-type TraceError interface {
-	StackTrace() []string
+type TraceableError interface {
+	// TraceableError is a no-op function used inside the Wrap function to
+	// distinguish this type of error from any other.
+	TraceableError()
 }
 
-type traceError struct {
+type traceableError struct {
 	err   error
 	stack []*stackFrame
 }
@@ -29,20 +31,22 @@ func Wrap(err error) error {
 	}
 
 	// Check if err is already implementing TraceError
-	if _, ok := err.(TraceError); ok {
+	if _, ok := err.(TraceableError); ok {
 		return err
 	}
 
 	// Capture stack trace and wrap err
-	return &traceError{
+	return &traceableError{
 		err:   err,
 		stack: captureStack(2, maxStackDepth),
 	}
 }
 
+func (t *traceableError) TraceableError() {}
+
 // Error returns the original error message plus the stack trace captured
 // at the time the error was first wrapped.
-func (t *traceError) Error() string {
+func (t *traceableError) Error() string {
 	str := t.err.Error()
 	for _, frame := range t.stack {
 		str += fmt.Sprintf("\n  at %s", frame.string())
@@ -50,16 +54,7 @@ func (t *traceError) Error() string {
 	return str
 }
 
-// StackTrace returns a slice of strings representing the frames of the
-// stack trace that was captured when the error was first wrapped.
-func (t *traceError) StackTrace() []string {
-	stack := make([]string, len(t.stack))
-	for i, frame := range t.stack {
-		stack[i] = frame.string()
-	}
-	return stack
-}
-
+// stackFrame represents a particular function in the call stack.
 type stackFrame struct {
 	file     string
 	line     int
