@@ -7,7 +7,7 @@ Traceable errors in Go.
 
 #### Example:
 
-```
+```go
 package main
 
 import (
