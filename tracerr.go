@@ -7,9 +7,10 @@ import (
 	"runtime"
 )
 
+// TraceableError interface indentifies traceable errors.
 type TraceableError interface {
-	// TraceableError is a no-op function used inside the Wrap function to
-	// distinguish this type of error from any other.
+	// TraceableError is a no-op function used to distinguish this type
+	// of error from any other. Follows the pattern used in runtime.Error.
 	TraceableError()
 }
 
