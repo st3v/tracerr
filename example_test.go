@@ -7,7 +7,6 @@ import (
 	"github.com/st3v/tracerr"
 )
 
-//
 func ExampleWrap() {
 	// A regular error
 	err := errors.New("Example Error")
@@ -19,7 +18,7 @@ func ExampleWrap() {
 	fmt.Println(err.Error())
 	// Output:
 	// Example Error
-	//   at ExampleWrap (github.com/st3v/tracerr_test/example_test.go:16)
+	//   at ExampleWrap (github.com/st3v/tracerr_test/example_test.go:15)
 	//   at runExample (testing/example.go:99)
 	//   at RunExamples (testing/example.go:36)
 	//   at Main (testing/testing.go:436)
@@ -43,13 +42,13 @@ func ExampleWrap_nested() {
 	}
 	// Output:
 	// Example Error
-	//   at (*foo).bar (github.com/st3v/tracerr_test/example_test.go:73)
-	//   at func·001 (github.com/st3v/tracerr_test/example_test.go:37)
-	//   at nested (github.com/st3v/tracerr_test/example_test.go:64)
-	//   at nested (github.com/st3v/tracerr_test/example_test.go:66)
-	//   at nested (github.com/st3v/tracerr_test/example_test.go:66)
-	//   at nested (github.com/st3v/tracerr_test/example_test.go:66)
-	//   at ExampleWrap_nested (github.com/st3v/tracerr_test/example_test.go:38)
+	//   at (*foo).bar (github.com/st3v/tracerr_test/example_test.go:72)
+	//   at func·001 (github.com/st3v/tracerr_test/example_test.go:36)
+	//   at nested (github.com/st3v/tracerr_test/example_test.go:63)
+	//   at nested (github.com/st3v/tracerr_test/example_test.go:65)
+	//   at nested (github.com/st3v/tracerr_test/example_test.go:65)
+	//   at nested (github.com/st3v/tracerr_test/example_test.go:65)
+	//   at ExampleWrap_nested (github.com/st3v/tracerr_test/example_test.go:37)
 	//   at runExample (testing/example.go:99)
 	//   at RunExamples (testing/example.go:36)
 	//   at Main (testing/testing.go:436)
