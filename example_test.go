@@ -34,7 +34,7 @@ func ExampleWrap_nested() {
 }
 
 func ExampleError() {
-	// Create error using convinience method
+	// Create error using convenience method
 	err := tracerr.Error("Example Error")
 
 	// Print error message and stack trace
@@ -42,7 +42,7 @@ func ExampleError() {
 }
 
 func ExampleErrorf() {
-	// Create error using convinience method
+	// Create error using convenience method
 	err := tracerr.Errorf("%s %s", "Example", "Error")
 
 	// Print error message and stack trace
