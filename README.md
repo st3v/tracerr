@@ -3,6 +3,8 @@ tracerr
 
 [![Build Status](https://travis-ci.org/st3v/tracerr.svg?branch=master)](https://travis-ci.org/st3v/tracerr)
 
+[![GoDoc](https://godoc.org/github.com/st3v/tracerr?status.png)](http://godoc.org/github.com/st3v/tracerr)
+
 Traceable errors in Go.
 
 #### Example:
