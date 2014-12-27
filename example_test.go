@@ -33,6 +33,22 @@ func ExampleWrap_nested() {
 	}
 }
 
+func ExampleError() {
+	// Create error using convinience method
+	err := tracerr.Error("Example Error")
+
+	// Print error message and stack trace
+	fmt.Println(err.Error())
+}
+
+func ExampleErrorf() {
+	// Create error using convinience method
+	err := tracerr.Errorf("%s %s", "Example", "Error")
+
+	// Print error message and stack trace
+	fmt.Println(err.Error())
+}
+
 // Recursive function that calls the passed in function at its tail end.
 func nested(depth int, fn func() error) error {
 	if depth <= 1 {

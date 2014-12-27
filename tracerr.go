@@ -1,6 +1,7 @@
 package tracerr
 
 import (
+	"errors"
 	"fmt"
 	"path/filepath"
 	"regexp"
@@ -26,6 +27,20 @@ const maxStackDepth = 64
 // The passed in error will not be wrapped if it is nil or it already has a
 // stack trace attached to it (i.e. it has already been wrapped).
 func Wrap(err error) error {
+	return wrap(err)
+}
+
+// Error returns a traceable error with the given message.
+func Error(message string) error {
+	return wrap(errors.New(message))
+}
+
+// Errorf returns a traceable error with the given formatted message.
+func Errorf(message string, a ...interface{}) error {
+	return wrap(fmt.Errorf(message, a...))
+}
+
+func wrap(err error) error {
 	// Handle nil errors
 	if err == nil {
 		return err
@@ -39,7 +54,7 @@ func Wrap(err error) error {
 	// Capture stack trace and wrap err
 	return &traceableError{
 		err:   err,
-		stack: captureStack(2, maxStackDepth),
+		stack: captureStack(3, maxStackDepth),
 	}
 }
 

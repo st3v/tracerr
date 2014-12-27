@@ -8,11 +8,42 @@ import (
 )
 
 func TestWrap(t *testing.T) {
-	errMsg := "Bogus Error"
-	err := Wrap(errors.New(errMsg))
+	err := Wrap(errors.New("Bogus Error"))
 
 	msg := err.Error()
-	if !strings.HasPrefix(msg, errMsg+"\n") {
+	if !strings.HasPrefix(msg, "Bogus Error\n") {
+		t.Errorf("Unexpected error message: %s", msg)
+	}
+
+	lineCount := strings.Count(err.Error(), "\n")
+	stackDepth := currentStackDepth()
+
+	if lineCount != stackDepth {
+		t.Errorf("Unexpected number of lines in error message. Expected %d. Got %d.", stackDepth, lineCount)
+	}
+}
+
+func TestError(t *testing.T) {
+	err := Error("Bogus Error")
+
+	msg := err.Error()
+	if !strings.HasPrefix(msg, "Bogus Error\n") {
+		t.Errorf("Unexpected error message: %s", msg)
+	}
+
+	lineCount := strings.Count(err.Error(), "\n")
+	stackDepth := currentStackDepth()
+
+	if lineCount != stackDepth {
+		t.Errorf("Unexpected number of lines in error message. Expected %d. Got %d.", stackDepth, lineCount)
+	}
+}
+
+func TestErrorf(t *testing.T) {
+	err := Errorf("This is a %s Error", "Bogus")
+
+	msg := err.Error()
+	if !strings.HasPrefix(msg, "This is a Bogus Error\n") {
 		t.Errorf("Unexpected error message: %s", msg)
 	}
 
